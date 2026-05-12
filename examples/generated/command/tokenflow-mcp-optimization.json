@@ -1,0 +1,32 @@
+{
+  "command_id": "tokenflow-mcp-optimization",
+  "title_zh": "TokenFlow MCP Optimization Command",
+  "host": "ide-agent",
+  "entry": {
+    "kind": "mcp_tool",
+    "ref": "tokenflow-toolkit"
+  },
+  "arguments": [
+    {
+      "name": "surface",
+      "type": "string",
+      "required": true,
+      "description_zh": "目标工具表面名称。"
+    },
+    {
+      "name": "mode",
+      "type": "string",
+      "required": false,
+      "description_zh": "执行模式，例如 server 或 gateway。"
+    }
+  ],
+  "capabilities": [
+    "toolkit"
+  ],
+  "source": {
+    "tooling_manifest": "manifests/tooling-manifest.json",
+    "adapter_matrix": "manifests/adapter-matrix.json",
+    "rendering_conventions": "manifests/rendering-conventions.json"
+  }
+}
+

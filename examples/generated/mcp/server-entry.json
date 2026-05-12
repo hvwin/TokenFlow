@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "adapterId": "mcp",
+  "entryShape": "server",
+  "hostCapability": "mcp",
+  "status": "ready-for-runtime",
+  "toolIds": [
+    "tokenflow-router",
+    "tokenflow-tokeneff",
+    "tokenflow-toolkit",
+    "tokenflow-openwolf",
+    "tokenflow-caveman"
+  ],
+  "sourceProjection": "tool-schema-projection.json",
+  "runtimeHints": {
+    "mode": "host-native",
+    "recommendedAdapters": [
+      "mcp"
+    ]
+  }
+}

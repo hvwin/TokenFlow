@@ -1,0 +1,252 @@
+{
+  "version": 1,
+  "scope": "TokenFlow prey capability registry",
+  "policy": {
+    "cardinality": "open",
+    "absorptionMode": "capability-first",
+    "statusModel": ["candidate", "planned", "absorbing", "absorbed", "retired"],
+    "idConvention": "machine ids use kebab-case, display labels use title"
+  },
+  "sources": [
+    {
+      "id": "Router",
+      "title": "路由中枢",
+      "kind": "tool-capability",
+      "status": "planned",
+      "essence": [
+        "task routing",
+        "role routing",
+        "model routing",
+        "adapter selection"
+      ],
+      "preferredTargets": [
+        "core/router",
+        "manifests/tooling-manifest.json",
+        "adapters/mcp"
+      ],
+      "preferredAdapters": [
+        "mcp",
+        "skill",
+        "command"
+      ]
+    },
+    {
+      "id": "TokenEff",
+      "title": "token 预算与压缩控制",
+      "kind": "tool-capability",
+      "status": "planned",
+      "essence": [
+        "token budget",
+        "context compaction",
+        "re-route suggestion",
+        "budget alert"
+      ],
+      "preferredTargets": [
+        "core/tokeneff",
+        "manifests/adapter-matrix.json",
+        "adapters/mcp"
+      ],
+      "preferredAdapters": [
+        "mcp",
+        "hook",
+        "skill"
+      ]
+    },
+    {
+      "id": "Toolkit",
+      "title": "最小工具包编排",
+      "kind": "tool-capability",
+      "status": "planned",
+      "essence": [
+        "minimal tool bundle",
+        "per-task capability pack",
+        "dispatch-ready combination"
+      ],
+      "preferredTargets": [
+        "core/toolkit",
+        "templates/command",
+        "adapters/skill"
+      ],
+      "preferredAdapters": [
+        "mcp",
+        "skill",
+        "command"
+      ]
+    },
+    {
+      "id": "OpenWolf",
+      "title": "高信号侦察",
+      "kind": "tool-capability",
+      "status": "planned",
+      "essence": [
+        "high-signal scouting",
+        "selective intake",
+        "proposal pre-scan",
+        "archive extraction"
+      ],
+      "preferredTargets": [
+        "core/openwolf",
+        "prey/source-capability-matrix.md",
+        "adapters/skill"
+      ],
+      "preferredAdapters": [
+        "skill",
+        "mcp",
+        "command"
+      ]
+    },
+    {
+      "id": "Caveman",
+      "title": "窄边界执行",
+      "kind": "tool-capability",
+      "status": "planned",
+      "essence": [
+        "low-context execution",
+        "bounded verification",
+        "minimal repair loop",
+        "tight scope work"
+      ],
+      "preferredTargets": [
+        "core/caveman",
+        "adapters/mcp",
+        "templates/skill"
+      ],
+      "preferredAdapters": [
+        "skill",
+        "mcp",
+        "command"
+      ]
+    }
+  ],
+  "candidateSources": [
+    {
+      "id": "rtk",
+      "title": "Rust Token Killer",
+      "kind": "capability-family",
+      "status": "candidate",
+      "essence": [
+        "command output filtering",
+        "context compression",
+        "hook-based command rewrite",
+        "agent tool integration"
+      ],
+      "members": [
+        "rtk-ai/rtk"
+      ],
+      "preferredTargets": [
+        "core/tokeneff",
+        "prey/candidates/RTK.md",
+        "adapters/hook",
+        "adapters/command"
+      ],
+      "preferredAdapters": [
+        "hook",
+        "command"
+      ]
+    },
+    {
+      "id": "prompt-compression",
+      "title": "Prompt Compression 家族",
+      "kind": "capability-family",
+      "status": "candidate",
+      "essence": [
+        "direct prompt compression",
+        "token reduction",
+        "semantic preservation",
+        "long-context optimization"
+      ],
+      "members": [
+        "LLMLingua",
+        "prompt_compressor",
+        "TokenCrush",
+        "PCToolkit",
+        "PromptOptimizer"
+      ],
+      "preferredTargets": [
+        "core/tokeneff",
+        "prey/candidates/prompt-compression.md",
+        "manifests/adapter-matrix.json"
+      ],
+      "preferredAdapters": [
+        "mcp",
+        "hook",
+        "skill"
+      ],
+      "references": [
+        "https://github.com/microsoft/LLMLingua",
+        "https://github.com/metawake/prompt_compressor",
+        "https://github.com/3DAgentWorld/Toolkit-for-Prompt-Compression",
+        "https://github.com/vaibkumr/prompt-optimizer"
+      ]
+    },
+    {
+      "id": "mcp-optimization",
+      "title": "MCP Optimization 家族",
+      "kind": "capability-family",
+      "status": "candidate",
+      "essence": [
+        "dynamic tool loading",
+        "tool surface reduction",
+        "code execution offload",
+        "schema overhead compression"
+      ],
+      "members": [
+        "Dynamic Toolsets",
+        "Unlock Pattern",
+        "Code Execution MCP",
+        "Claude Code Skills",
+        "Bifrost MCP Gateway"
+      ],
+      "preferredTargets": [
+        "core/toolkit",
+        "adapters/mcp",
+        "manifests/tooling-manifest.json",
+        "prey/candidates/mcp-optimization.md"
+      ],
+      "preferredAdapters": [
+        "mcp",
+        "skill",
+        "command"
+      ],
+      "references": [
+        "mcp market / vendor docs",
+        "Claude ecosystem docs",
+        "Speakeasy / MindStudio related material"
+      ]
+    },
+    {
+      "id": "skills-caching",
+      "title": "Skills / Caching 家族",
+      "kind": "capability-family",
+      "status": "candidate",
+      "essence": [
+        "reusable SOP",
+        "prefix caching",
+        "semantic reuse",
+        "repeated-call cost reduction"
+      ],
+      "members": [
+        "Claude Skills",
+        "Prompt Caching",
+        "Semantic Caching",
+        "GPTCache"
+      ],
+      "preferredTargets": [
+        "adapters/skill",
+        "core/tokeneff",
+        "prey/candidates/skills-caching.md",
+        "manifests/tooling-manifest.json"
+      ],
+      "preferredAdapters": [
+        "skill",
+        "hook",
+        "mcp"
+      ],
+      "references": [
+        "platform prompt caching docs",
+        "Claude Skills ecosystem docs",
+        "https://github.com/zilliztech/GPTCache"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "hook_id": "tokenflow-skills-caching-hook",
+  "title_zh": "TokenFlow Skills / Caching Hook",
+  "host": "ide-agent",
+  "stage": "around",
+  "enabled": true,
+  "when": {
+    "event": "before_context_attach",
+    "conditions": [
+      "hostCapability == 'ide-agent'",
+      "familyStatus == 'candidate'"
+    ]
+  },
+  "actions": [
+    {
+      "type": "skill_ref",
+      "ref": "tokenflow-skills-caching",
+      "input_map": {
+        "capability_id": "tokeneff",
+        "family_id": "skills-caching"
+      }
+    }
+  ],
+  "source": {
+    "tooling_manifest": "manifests/tooling-manifest.json",
+    "adapter_matrix": "manifests/adapter-matrix.json",
+    "rendering_conventions": "manifests/rendering-conventions.json"
+  }
+}
+

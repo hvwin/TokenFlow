@@ -1,0 +1,37 @@
+{
+  "tool_id": "tokenflow-caveman",
+  "title_zh": "窄边界执行",
+  "description_zh": "窄边界执行 能力入口。职责: executionPlan, verificationPlan, repairPlan。",
+  "entry_shape": "gateway",
+  "capabilities": [
+    "caveman"
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "boundedTask": {
+        "type": "string",
+        "description": "Input field boundedTask."
+      },
+      "toolBundle": {
+        "type": "string",
+        "description": "Input field toolBundle."
+      },
+      "verificationMode": {
+        "type": "string",
+        "description": "Input field verificationMode."
+      }
+    },
+    "required": [
+      "boundedTask",
+      "toolBundle",
+      "verificationMode"
+    ]
+  },
+  "source": {
+    "tooling_manifest": "manifests/tooling-manifest.json",
+    "adapter_matrix": "manifests/adapter-matrix.json",
+    "rendering_conventions": "manifests/rendering-conventions.json"
+  }
+}
+

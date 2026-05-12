@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "bridgeId": "codex-teams",
+  "displayName": "Codex Teams Bridge",
+  "scope": "codex-teams-host",
+  "consumesTruth": [
+    "core/capability-graph.json",
+    "manifests/tooling-manifest.json",
+    "manifests/adapter-matrix.json",
+    "manifests/rendering-conventions.json"
+  ],
+  "consumesContext": [
+    ".codex-teams/features/{featureSlug}/state.json"
+  ],
+  "exports": [
+    "resolveCodexTeamsBridge",
+    "buildCodexTeamsDispatch",
+    "verifyCodexTeamsBridgeInputs"
+  ],
+  "relations": {
+    "skill": "semantic-trigger-and-sop-injection",
+    "mcp": "preferred-tool-execution-surface",
+    "hook": "optional-prepost-chain",
+    "command": "auditable-fallback-entry"
+  },
+  "notes": [
+    "feature state is orchestration context, not capability source",
+    "bridge payload should remain portable to non-codex hosts",
+    "render from shared truth and host capabilities"
+  ]
+}

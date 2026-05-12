@@ -1,0 +1,28 @@
+{
+  "name": "token-workflow-tools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "TokenFlow host-agnostic token workflow tool layer.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hvwin/TokenFlow.git"
+  },
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "verify:bridge": "node scripts/verify-bridge-simple.js",
+    "verify:runtime": "node dist/scripts/verify-runtime.js",
+    "verify:mcp-sdk": "node dist/scripts/verify-mcp-sdk.js",
+    "verify:ts-bridge": "node dist/scripts/verify-bridge-runtime.js",
+    "verify": "npm run typecheck && npm run build && npm run verify:bridge && npm run verify:runtime && npm run verify:mcp-sdk"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "typescript": "^5.4.5"
+  }
+}

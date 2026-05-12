@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "product": {
+    "name": "TokenFlow",
+    "repo": "token-workflow-tools",
+    "mode": "open-ecosystem"
+  },
+  "sourceOfTruth": {
+    "coreGraph": "core/capability-graph.json",
+    "adapterMatrix": "manifests/adapter-matrix.json",
+    "candidateFamilies": "manifests/candidate-families.json",
+    "preyRegistry": "prey/prey-sources.json",
+    "familyRendering": "manifests/family-rendering.json",
+    "renderingConventions": "manifests/rendering-conventions.json"
+  },
+  "core": {
+    "modules": [
+      {
+        "id": "router",
+        "responsibility": "task routing, role routing, model routing, tool routing"
+      },
+      {
+        "id": "tokeneff",
+        "responsibility": "token budget, context compression, re-route suggestion"
+      },
+      {
+        "id": "toolkit",
+        "responsibility": "minimal tool bundle and task-level orchestration"
+      },
+      {
+        "id": "openwolf",
+        "responsibility": "high-signal scouting and selective intake"
+      },
+      {
+        "id": "caveman",
+        "responsibility": "low-context bounded execution, verification and repair"
+      }
+    ],
+    "absorptionCriteria": [
+      "can be reduced to a stable capability",
+      "can be mapped into core without host-specific behavior",
+      "can reduce token cost or expand reusable capability",
+      "can be surfaced through one or more adapters"
+    ],
+    "statusModel": ["candidate", "planned", "absorbing", "absorbed", "retired"]
+  },
+  "candidateFamilies": [
+    {
+      "id": "prompt-compression",
+      "title": "Prompt Compression",
+      "status": "candidate",
+      "preferredCore": "tokeneff",
+      "preferredAdapters": ["mcp", "hook", "skill"],
+      "familyManifestRef": "manifests/candidate-families.json#prompt-compression",
+      "preyCandidateId": "prompt-compression"
+    },
+    {
+      "id": "mcp-optimization",
+      "title": "MCP Optimization",
+      "status": "candidate",
+      "preferredCore": "toolkit",
+      "preferredAdapters": ["mcp", "skill", "command"],
+      "familyManifestRef": "manifests/candidate-families.json#mcp-optimization",
+      "preyCandidateId": "mcp-optimization"
+    },
+    {
+      "id": "skills-caching",
+      "title": "Skills / Caching",
+      "status": "candidate",
+      "preferredCore": "tokeneff",
+      "preferredAdapters": ["skill", "hook", "mcp"],
+      "familyManifestRef": "manifests/candidate-families.json#skills-caching",
+      "preyCandidateId": "skills-caching"
+    },
+    {
+      "id": "rtk",
+      "title": "RTK",
+      "status": "candidate",
+      "preferredCore": "tokeneff",
+      "preferredAdapters": ["hook", "command"],
+      "familyManifestRef": "manifests/candidate-families.json#rtk",
+      "preyCandidateId": "rtk"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "generatedAt": "2026-05-13T04:09:59.1536011+08:00",
+  "outputRoot": "examples/generated",
+  "hostCapability": "ide-agent",
+  "featureSlug": "tokenflow",
+  "preferredEntryShape": "gateway",
+  "recommendedAdapters": [
+    "generic-ide",
+    "codex-teams",
+    "skill",
+    "mcp"
+  ],
+  "artifacts": {
+    "mcpTools": [
+      "tokenflow-router",
+      "tokenflow-tokeneff",
+      "tokenflow-toolkit",
+      "tokenflow-openwolf",
+      "tokenflow-caveman"
+    ],
+    "skillCount": 3,
+    "hookCount": 3,
+    "commandCount": 2
+  },
+  "paths": {
+    "projection": "mcp/tool-schema-projection.json",
+    "serverEntry": "mcp/server-entry.json",
+    "gatewayEntry": "mcp/gateway-entry.json",
+    "skills": [
+      "skill/prompt-compression/SKILL.md",
+      "skill/mcp-optimization/SKILL.md",
+      "skill/skills-caching/SKILL.md"
+    ],
+    "hooks": [
+      "hook/tokenflow-prompt-compression.json",
+      "hook/tokenflow-skills-caching.json",
+      "hook/tokenflow-rtk.json"
+    ],
+    "commands": [
+      "command/tokenflow-mcp-optimization.json",
+      "command/tokenflow-rtk.json"
+    ]
+  }
+}

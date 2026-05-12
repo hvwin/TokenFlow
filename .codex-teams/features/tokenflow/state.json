@@ -1,0 +1,1124 @@
+{
+  "version": 2,
+  "feature": {
+    "slug": "tokenflow",
+    "title": "TokenFlow 终极形态落地",
+    "objective": "TokenFlow 终极形态落地",
+    "status": "done",
+    "profile": "full-blood",
+    "currentPhase": "P3",
+    "planningMode": "direct",
+    "selectedProposalId": "direct-open-ecosystem",
+    "concurrencyLimit": 1,
+    "createdAt": "2026-05-13T01:23:54+08:00",
+    "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+  },
+  "planning": {
+    "objective": "TokenFlow 终极形态落地",
+    "successCriteria": [
+      "core 能力图和吸收判定明确",
+      "manifests 与候选家族分类明确",
+      "MCP / Skill / Hook / Command 的渲染方向明确",
+      "IDE / agent bridge 的抽象边界明确",
+      "feature 状态、任务图和文档镜像一致"
+    ],
+    "constraints": [
+      "TokenFlow 对外统一名为 TokenFlow",
+      "仓库名保留 token-workflow-tools",
+      "猎物层按能力家族分类",
+      "只要有宿主支持，就按最佳形态输出"
+    ],
+    "scopeIn": [
+      "core 能力图和吸收判定",
+      "manifests 与候选家族分类",
+      "MCP 运行层骨架",
+      "Skill / Hook / Command 渲染器骨架",
+      "IDE / agent bridge 骨架"
+    ],
+    "scopeOut": [
+      "完整运行时实现",
+      "大而全 UI",
+      "单一宿主绑定",
+      "未判定能力直接写入 core"
+    ],
+    "knownRisks": [
+      "候选猎物被过早视为已吸收",
+      "渲染层和真源层混写",
+      "bridge 过早绑定特定宿主"
+    ],
+    "openQuestions": [
+      "IDE / agent bridge 优先支持哪些宿主",
+      "MCP 运行层先做 server、gateway 还是双形态",
+      "候选家族的首批吸收顺序"
+    ],
+    "doNotDo": [
+      "不要把候选家族直接写成已吸收真源",
+      "不要先做大而全 UI",
+      "不要先锁死某一个宿主"
+    ],
+    "expectedDeliverables": [
+      "冻结后的 core 能力图",
+      "机器可读 manifests",
+      "候选家族分类",
+      "MCP / Skill / Hook / Command / bridge 骨架"
+    ],
+    "briefPath": "planning/brief.md",
+    "reviewPath": "planning/review.md",
+    "proposalsDir": "planning/proposals",
+    "freezeStatus": "frozen",
+    "freezeNotes": "direct 路线已确认，先 core / manifests，后 adapters / bridge。",
+    "updatedAt": "2026-05-13T02:53:42+08:00",
+    "updatedBy": "coordinator"
+  },
+  "queues": {
+    "proposal": [],
+    "ready": [],
+    "review": [],
+    "verify": [],
+    "rework": [],
+    "patrol": [],
+    "blocked": []
+  },
+  "leases": [],
+  "tasks": [
+    {
+      "id": "T001",
+      "title": "冻结目标并建立初始任务图",
+      "status": "done",
+      "owner": "coordinator",
+      "role": "plan-author",
+      "phase": "P0",
+      "proposalId": "",
+      "acceptanceGate": "brief-frozen",
+      "memoryScope": "L3",
+      "dependencies": [],
+      "blocks": [],
+      "readScope": [
+        "用户请求",
+        "AGENTS.md",
+        "planning/brief.md",
+        "planning/review.md"
+      ],
+      "writeScope": [
+        ".codex-teams/features",
+        "planning/"
+      ],
+      "deliverable": "已冻结 brief、初始任务图和 dispatch 草案",
+      "evidence": [
+        "brief frozen",
+        "task graph established"
+      ],
+      "memoryRefs": [
+        "state.json",
+        "planning/brief.md",
+        "handoff.md"
+      ],
+      "blockingConditions": [
+        "需求边界仍需保持清晰"
+      ],
+      "doNotDo": [
+        "不要把候选猎物直接写成已吸收真源。"
+      ],
+      "instanceKey": "brief-freeze",
+      "budgetClass": "planning",
+      "heartbeatMinutes": 5,
+      "lastHeartbeatAt": "2026-05-13T01:36:00+08:00",
+      "scratchPath": "scratch/coordinator",
+      "leaseId": "",
+      "tokenTooling": [
+        "Router",
+        "OpenWolf",
+        "TokenEff"
+      ],
+      "createdAt": "2026-05-13T01:23:54+08:00",
+      "updatedAt": "2026-05-13T01:36:00+08:00"
+    },
+    {
+      "id": "T002",
+      "title": "冻结 core 能力图和吸收判定",
+      "status": "done",
+      "owner": "coordinator",
+      "role": "architect",
+      "phase": "P1",
+      "proposalId": "",
+      "acceptanceGate": "core-graph-frozen",
+      "memoryScope": "L3",
+      "dependencies": [
+        "T001"
+      ],
+      "blocks": [],
+      "readScope": [
+        "AGENTS.md",
+        "PROJECT_REQUIREMENTS.md",
+        "PROJECT_DETAILS.md",
+        "prey/prey-sources.json",
+        "prey/source-capability-matrix.md",
+        "prey/absorption-status.md"
+      ],
+      "writeScope": [
+        "manifests",
+        "core",
+        "prey"
+      ],
+      "deliverable": "core 能力图与吸收判定",
+      "evidence": [
+        "core/capability-graph.json frozen",
+        "absorption policy and promotion gates aligned"
+      ],
+      "memoryRefs": [
+        "state.json",
+        "planning/brief.md",
+        "memory.md"
+      ],
+      "blockingConditions": [
+        "候选家族边界不清"
+      ],
+      "doNotDo": [
+        "不要把候选猎物直接写成已吸收真源。"
+      ],
+      "instanceKey": "core-graph-freeze",
+      "budgetClass": "build",
+      "heartbeatMinutes": 5,
+      "lastHeartbeatAt": "2026-05-13T02:21:01+08:00",
+      "scratchPath": "scratch/coordinator",
+      "leaseId": "",
+      "tokenTooling": [
+        "Router",
+        "OpenWolf",
+        "TokenEff"
+      ],
+      "createdAt": "2026-05-13T01:36:00+08:00",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "T003",
+      "title": "冻结 manifests 与候选家族分类",
+      "status": "done",
+      "owner": "coordinator",
+      "role": "implementer",
+      "phase": "P1",
+      "proposalId": "",
+      "acceptanceGate": "manifests-frozen",
+      "memoryScope": "L3",
+      "dependencies": [
+        "T002"
+      ],
+      "blocks": [],
+      "readScope": [
+        "manifests/README.md",
+        "prey/README.md",
+        "prey/candidates/README.md",
+        "prey/prey-sources.json",
+        "prey/source-capability-matrix.md",
+        "prey/absorption-status.md"
+      ],
+      "writeScope": [
+        "manifests",
+        "prey"
+      ],
+      "deliverable": "manifests 与候选家族分类",
+      "evidence": [
+        "tooling-manifest / adapter-matrix / candidate-families aligned",
+        "prey family registry aligned including rtk singleton family"
+      ],
+      "memoryRefs": [
+        "state.json",
+        "planning/brief.md",
+        "memory.md"
+      ],
+      "blockingConditions": [
+        "core 能力图未冻结"
+      ],
+      "doNotDo": [
+        "不要把候选家族直接改成已吸收。"
+      ],
+      "instanceKey": "manifests-freeze",
+      "budgetClass": "build",
+      "heartbeatMinutes": 5,
+      "lastHeartbeatAt": "2026-05-13T02:21:01+08:00",
+      "scratchPath": "scratch/coordinator",
+      "leaseId": "",
+      "tokenTooling": [
+        "TokenEff",
+        "Toolkit"
+      ],
+      "createdAt": "2026-05-13T01:36:00+08:00",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "T004",
+      "title": "建立 MCP 运行层骨架",
+      "status": "done",
+      "owner": "coordinator",
+      "role": "implementer",
+      "phase": "P2",
+      "proposalId": "",
+      "acceptanceGate": "mcp-scaffold-ready",
+      "memoryScope": "L3",
+      "dependencies": [
+        "T002",
+        "T003"
+      ],
+      "blocks": [],
+      "readScope": [
+        "adapters/README.md",
+        "manifests/README.md",
+        "PROJECT_DETAILS.md"
+      ],
+      "writeScope": [
+        "adapters/mcp",
+        "manifests"
+      ],
+      "deliverable": "MCP 运行层骨架",
+      "evidence": [
+        "adapters/mcp/runtime-surface.json created",
+        "adapters/mcp/index.ts scaffolded"
+      ],
+      "memoryRefs": [
+        "state.json",
+        "planning/brief.md",
+        "memory.md"
+      ],
+      "blockingConditions": [
+        "manifests 未冻结"
+      ],
+      "doNotDo": [
+        "不要先绑定单一宿主。"
+      ],
+      "instanceKey": "mcp-scaffold",
+      "budgetClass": "build",
+      "heartbeatMinutes": 5,
+      "lastHeartbeatAt": "2026-05-13T02:21:01+08:00",
+      "scratchPath": "scratch/coordinator",
+      "leaseId": "",
+      "tokenTooling": [
+        "Toolkit",
+        "Router"
+      ],
+      "createdAt": "2026-05-13T01:36:00+08:00",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "T005",
+      "title": "建立 Skill / Hook / Command 渲染器骨架",
+      "status": "done",
+      "owner": "coordinator",
+      "role": "implementer",
+      "phase": "P2",
+      "proposalId": "",
+      "acceptanceGate": "renderer-scaffold-ready",
+      "memoryScope": "L3",
+      "dependencies": [
+        "T002",
+        "T003"
+      ],
+      "blocks": [],
+      "readScope": [
+        "adapters/README.md",
+        "templates/README.md",
+        "PROJECT_DETAILS.md"
+      ],
+      "writeScope": [
+        "adapters/skill",
+        "adapters/hook",
+        "adapters/command",
+        "templates"
+      ],
+      "deliverable": "Skill / Hook / Command 渲染器骨架",
+      "evidence": [
+        "skill / hook / command adapter readmes scaffolded",
+        "skill / mcp / hook / command templates aligned"
+      ],
+      "memoryRefs": [
+        "state.json",
+        "planning/brief.md",
+        "memory.md"
+      ],
+      "blockingConditions": [
+        "manifests 未冻结"
+      ],
+      "doNotDo": [
+        "不要把渲染模板写成运行时。"
+      ],
+      "instanceKey": "renderer-scaffold",
+      "budgetClass": "build",
+      "heartbeatMinutes": 5,
+      "lastHeartbeatAt": "2026-05-13T02:21:01+08:00",
+      "scratchPath": "scratch/coordinator",
+      "leaseId": "",
+      "tokenTooling": [
+        "Skill",
+        "Hook",
+        "Command"
+      ],
+      "createdAt": "2026-05-13T01:36:00+08:00",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "T006",
+      "title": "建立 IDE / agent bridge 骨架",
+      "status": "done",
+      "owner": "coordinator",
+      "role": "implementer",
+      "phase": "P2",
+      "proposalId": "",
+      "acceptanceGate": "bridge-scaffold-ready",
+      "memoryScope": "L3",
+      "dependencies": [
+        "T004",
+        "T005"
+      ],
+      "blocks": [],
+      "readScope": [
+        "adapters/README.md",
+        "PROJECT_DETAILS.md",
+        "PROJECT_CONSTRAINTS.md"
+      ],
+      "writeScope": [
+        "adapters/generic-ide",
+        "adapters/codex-teams"
+      ],
+      "deliverable": "IDE / agent bridge 骨架",
+      "evidence": [
+        "generic-ide bridge scaffolded",
+        "codex-teams bridge scaffolded with shared context path template"
+      ],
+      "memoryRefs": [
+        "state.json",
+        "planning/brief.md",
+        "memory.md"
+      ],
+      "blockingConditions": [
+        "MCP 和 renderer 骨架未完成"
+      ],
+      "doNotDo": [
+        "不要锁死单一宿主。"
+      ],
+      "instanceKey": "bridge-scaffold",
+      "budgetClass": "build",
+      "heartbeatMinutes": 5,
+      "lastHeartbeatAt": "2026-05-13T02:21:01+08:00",
+      "scratchPath": "scratch/coordinator",
+      "leaseId": "",
+      "tokenTooling": [
+        "Router",
+        "Toolkit"
+      ],
+      "createdAt": "2026-05-13T01:36:00+08:00",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "T007",
+      "title": "MCP Runtime 实装",
+      "status": "done",
+      "owner": "Singer",
+      "role": "implementer",
+      "phase": "P3",
+      "proposalId": "",
+      "acceptanceGate": "mcp-runtime-ready",
+      "memoryScope": "L3",
+      "dependencies": [
+        "T004"
+      ],
+      "blocks": [],
+      "readScope": [
+        "adapters/mcp/projection.ts",
+        "adapters/mcp/runtime.ts",
+        "examples/generated/mcp/"
+      ],
+      "writeScope": [
+        "adapters/mcp/server.ts",
+        "adapters/mcp/gateway.ts",
+        "adapters/mcp/loader.ts"
+      ],
+      "deliverable": "MCP server/gateway/loader runtime",
+      "evidence": [],
+      "memoryRefs": [
+        "state.json",
+        "planning/runtime-implementation-plan.md"
+      ],
+      "blockingConditions": [],
+      "doNotDo": [
+        "不要修改 core 或其他 adapter。"
+      ],
+      "instanceKey": "mcp-runtime",
+      "budgetClass": "build",
+      "heartbeatMinutes": 5,
+      "lastHeartbeatAt": "2026-05-13T04:06:55.1680928+08:00",
+      "scratchPath": "scratch/worker-mcp-runtime",
+      "leaseId": "",
+      "tokenTooling": [
+        "Toolkit",
+        "Router"
+      ],
+      "createdAt": "2026-05-13T04:06:55.1680928+08:00",
+      "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+    },
+    {
+      "id": "T008",
+      "title": "Renderer Runtime 实装",
+      "status": "done",
+      "owner": "Maxwell",
+      "role": "implementer",
+      "phase": "P3",
+      "proposalId": "",
+      "acceptanceGate": "renderer-runtime-ready",
+      "memoryScope": "L3",
+      "dependencies": [
+        "T005"
+      ],
+      "blocks": [],
+      "readScope": [
+        "adapters/skill/README.md",
+        "adapters/hook/README.md",
+        "adapters/command/README.md",
+        "templates/"
+      ],
+      "writeScope": [
+        "adapters/skill/render.ts",
+        "adapters/hook/render.ts",
+        "adapters/command/render.ts"
+      ],
+      "deliverable": "Skill/Hook/Command renderer runtime",
+      "evidence": [],
+      "memoryRefs": [
+        "state.json",
+        "planning/runtime-implementation-plan.md"
+      ],
+      "blockingConditions": [],
+      "doNotDo": [
+        "不要修改 scripts 或 templates。"
+      ],
+      "instanceKey": "renderer-runtime",
+      "budgetClass": "build",
+      "heartbeatMinutes": 5,
+      "lastHeartbeatAt": "2026-05-13T04:06:55.1680928+08:00",
+      "scratchPath": "scratch/worker-renderers-runtime",
+      "leaseId": "",
+      "tokenTooling": [
+        "Skill",
+        "Hook",
+        "Command"
+      ],
+      "createdAt": "2026-05-13T04:06:55.1680928+08:00",
+      "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+    },
+    {
+      "id": "T009",
+      "title": "Bridge Runtime 实装",
+      "status": "done",
+      "owner": "Ramanujan",
+      "role": "implementer",
+      "phase": "P3",
+      "proposalId": "",
+      "acceptanceGate": "bridge-runtime-ready",
+      "memoryScope": "L3",
+      "dependencies": [
+        "T006"
+      ],
+      "blocks": [],
+      "readScope": [
+        "adapters/generic-ide/contracts.ts",
+        "adapters/codex-teams/contracts.ts",
+        "manifests/adapter-matrix.json"
+      ],
+      "writeScope": [
+        "adapters/generic-ide/bridge.ts",
+        "adapters/codex-teams/bridge.ts"
+      ],
+      "deliverable": "Generic-IDE 与 Codex-Teams bridge runtime",
+      "evidence": [],
+      "memoryRefs": [
+        "state.json",
+        "planning/runtime-implementation-plan.md"
+      ],
+      "blockingConditions": [],
+      "doNotDo": [
+        "不要硬编码宿主绑定。"
+      ],
+      "instanceKey": "bridge-runtime",
+      "budgetClass": "build",
+      "heartbeatMinutes": 5,
+      "lastHeartbeatAt": "2026-05-13T04:06:55.1680928+08:00",
+      "scratchPath": "scratch/worker-bridge-runtime",
+      "leaseId": "",
+      "tokenTooling": [
+        "Router",
+        "Toolkit"
+      ],
+      "createdAt": "2026-05-13T04:06:55.1680928+08:00",
+      "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+    },
+    {
+      "id": "T010",
+      "title": "Smoke Test 补全",
+      "status": "done",
+      "owner": "Franklin",
+      "role": "tester",
+      "phase": "P3",
+      "proposalId": "",
+      "acceptanceGate": "smoke-test-ready",
+      "memoryScope": "L3",
+      "dependencies": [
+        "T007",
+        "T008",
+        "T009"
+      ],
+      "blocks": [],
+      "readScope": [
+        "scripts/Invoke-TokenFlowGeneration.ps1",
+        "scripts/Invoke-TokenFlowValidation.ps1",
+        "adapters/mcp/loader.ts"
+      ],
+      "writeScope": [
+        "scripts/Invoke-TokenFlowSmokeTest.ps1",
+        "examples/smoke-test/"
+      ],
+      "deliverable": "Smoke test 脚本与样例输出",
+      "evidence": [],
+      "memoryRefs": [
+        "state.json",
+        "planning/runtime-implementation-plan.md"
+      ],
+      "blockingConditions": [],
+      "doNotDo": [
+        "不要修改已有的 generation / validation 脚本。"
+      ],
+      "instanceKey": "smoke-test",
+      "budgetClass": "verify",
+      "heartbeatMinutes": 5,
+      "lastHeartbeatAt": "2026-05-13T04:06:55.1680928+08:00",
+      "scratchPath": "scratch/worker-smoke-test",
+      "leaseId": "",
+      "tokenTooling": [
+        "Caveman"
+      ],
+      "createdAt": "2026-05-13T04:06:55.1680928+08:00",
+      "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+    },
+    {
+      "id": "T011",
+      "title": "文档补全",
+      "status": "done",
+      "owner": "Boole",
+      "role": "documenter",
+      "phase": "P3",
+      "proposalId": "",
+      "acceptanceGate": "docs-ready",
+      "memoryScope": "L3",
+      "dependencies": [],
+      "blocks": [],
+      "readScope": [
+        "scripts/",
+        "adapters/",
+        "examples/generated/",
+        "PROJECT_*.md"
+      ],
+      "writeScope": [
+        "docs/generation-guide.md",
+        "docs/integration-guide.md",
+        "docs/runtime-guide.md",
+        "README.md"
+      ],
+      "deliverable": "完整文档与 README",
+      "evidence": [],
+      "memoryRefs": [
+        "state.json",
+        "planning/runtime-implementation-plan.md"
+      ],
+      "blockingConditions": [],
+      "doNotDo": [
+        "不要修改代码或 scripts。"
+      ],
+      "instanceKey": "docs",
+      "budgetClass": "docs",
+      "heartbeatMinutes": 5,
+      "lastHeartbeatAt": "2026-05-13T04:06:55.1680928+08:00",
+      "scratchPath": "scratch/worker-docs",
+      "leaseId": "",
+      "tokenTooling": [
+        "OpenWolf"
+      ],
+      "createdAt": "2026-05-13T04:06:55.1680928+08:00",
+      "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+    }
+  ],
+  "agents": [
+    {
+      "id": "019e1d56-5674-7143-9e6a-84b4fa98486a",
+      "name": "Rawls",
+      "role": "architect",
+      "taskIds": [
+        "T002",
+        "T003"
+      ],
+      "status": "completed",
+      "evidencePath": "agents/worker-core-manifests.md",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "019e1d56-56b5-7442-a41c-1130bb7b6f5e",
+      "name": "Poincare",
+      "role": "implementer",
+      "taskIds": [
+        "T004"
+      ],
+      "status": "completed",
+      "evidencePath": "agents/worker-mcp.md",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "019e1d56-56e9-7ff1-87e4-0f6e347ee385",
+      "name": "James",
+      "role": "implementer",
+      "taskIds": [
+        "T005"
+      ],
+      "status": "completed",
+      "evidencePath": "agents/worker-renderers.md",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "019e1d56-571a-7f21-a377-ce22e082fceb",
+      "name": "Fermat",
+      "role": "implementer",
+      "taskIds": [
+        "T006"
+      ],
+      "status": "completed",
+      "evidencePath": "agents/worker-bridges.md",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "019e1dcc-0b9c-7dc1-bf6a-daca0a9b819c",
+      "name": "Singer",
+      "role": "implementer",
+      "taskIds": [
+        "T007"
+      ],
+      "status": "completed",
+      "evidencePath": "agents/worker-mcp-runtime.md",
+      "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+    },
+    {
+      "id": "019e1dcc-0bcb-72a1-9cb2-268bd4f54743",
+      "name": "Maxwell",
+      "role": "implementer",
+      "taskIds": [
+        "T008"
+      ],
+      "status": "completed",
+      "evidencePath": "agents/worker-renderers-runtime.md",
+      "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+    },
+    {
+      "id": "019e1dcc-0ccc-7e80-9a55-2bca80836351",
+      "name": "Ramanujan",
+      "role": "implementer",
+      "taskIds": [
+        "T009"
+      ],
+      "status": "completed",
+      "evidencePath": "agents/worker-bridge-runtime.md",
+      "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+    },
+    {
+      "id": "019e1dcc-0d07-7b31-b40e-b599a4e1b804",
+      "name": "Franklin",
+      "role": "tester",
+      "taskIds": [
+        "T010"
+      ],
+      "status": "completed",
+      "evidencePath": "agents/worker-smoke-test.md",
+      "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+    },
+    {
+      "id": "019e1dcc-0d3e-7220-9366-b23a09c9012c",
+      "name": "Boole",
+      "role": "documenter",
+      "taskIds": [
+        "T011"
+      ],
+      "status": "completed",
+      "evidencePath": "agents/worker-docs.md",
+      "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+    }
+  ],
+  "verification": [
+    {
+      "id": "V001",
+      "kind": "json-parse",
+      "summary": "state、retrieval-index、manifests 和 core capability graph 解析通过。",
+      "commands": [
+        "ConvertFrom-Json state.json",
+        "ConvertFrom-Json retrieval-index.json",
+        "ConvertFrom-Json manifests/*.json",
+        "ConvertFrom-Json core/capability-graph.json"
+      ],
+      "status": "passed",
+      "actor": "coordinator",
+      "createdAt": "2026-05-13T01:36:00+08:00",
+      "updatedAt": "2026-05-13T01:36:00+08:00"
+    },
+    {
+      "id": "V002",
+      "kind": "json-parse",
+      "summary": "rendering conventions、adapter bridge manifest、mcp runtime surface 与 prey registry 解析通过。",
+      "commands": [
+        "ConvertFrom-Json manifests/rendering-conventions.json",
+        "ConvertFrom-Json adapters/mcp/runtime-surface.json",
+        "ConvertFrom-Json adapters/generic-ide/bridge.manifest.json",
+        "ConvertFrom-Json adapters/codex-teams/bridge.manifest.json",
+        "ConvertFrom-Json prey/prey-sources.json"
+      ],
+      "status": "passed",
+      "actor": "coordinator",
+      "createdAt": "2026-05-13T02:21:01+08:00",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "V003",
+      "kind": "alignment-check",
+      "summary": "candidate family ID、bridge context path 与 template conventions 对齐通过。",
+      "commands": [
+        "compare candidate family IDs across core/tooling/candidate-families/prey",
+        "check manifests/rendering-conventions.json against hook/command templates",
+        "check codex-teams bridge context path template",
+        "check TS scaffold files are non-empty"
+      ],
+      "status": "passed",
+      "actor": "coordinator",
+      "createdAt": "2026-05-13T02:21:01+08:00",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "V004",
+      "kind": "generation-validation",
+      "summary": "Invoke-TokenFlowGeneration / Validation 脚本与 examples/generated 样例产物验证通过。",
+      "commands": [
+        "Invoke-TokenFlowGeneration.ps1 -OutputRoot examples/generated -HostCapability ide-agent -FeatureSlug tokenflow -Clean",
+        "Invoke-TokenFlowValidation.ps1 -GeneratedRoot examples/generated"
+      ],
+      "status": "passed",
+      "actor": "coordinator",
+      "createdAt": "2026-05-13T02:53:42+08:00",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "id": "V005",
+      "kind": "smoke-test",
+      "summary": "Smoke test 全部通过（32/32），覆盖 generation、validation、runtime load、artifact integrity。",
+      "commands": [
+        "Invoke-TokenFlowSmokeTest.ps1"
+      ],
+      "status": "passed",
+      "actor": "coordinator",
+      "createdAt": "2026-05-13T04:15:36.0337096+08:00",
+      "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D001",
+      "title": "TokenFlow 生态口径冻结",
+      "decision": "TokenFlow 对外统一为开放式猎物生态，首批五项只是样本。",
+      "evidence": [
+        "PROJECT_REQUIREMENTS.md",
+        "prey/README.md",
+        "prey/prey-sources.json"
+      ],
+      "actor": "coordinator",
+      "createdAt": "2026-05-13T01:36:00+08:00",
+      "updatedAt": "2026-05-13T01:36:00+08:00"
+    },
+    {
+      "id": "D002",
+      "title": "渲染共享约定冻结",
+      "decision": "新增 manifests/rendering-conventions.json，统一 stage / action_type / entry_kind / bridge phase / feature state path 模板口径。",
+      "evidence": [
+        "manifests/rendering-conventions.json",
+        "templates/*",
+        "adapters/mcp/*",
+        "adapters/generic-ide/*",
+        "adapters/codex-teams/*"
+      ],
+      "actor": "coordinator",
+      "createdAt": "2026-05-13T02:21:01+08:00",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "D003",
+      "title": "最小生成与校验闭环落地",
+      "decision": "优先用 PowerShell 落 generation / validation 脚本，避免在运行时收口前引入额外 TS 构建依赖。",
+      "evidence": [
+        "scripts/Invoke-TokenFlowGeneration.ps1",
+        "scripts/Invoke-TokenFlowValidation.ps1",
+        "examples/generated/"
+      ],
+      "actor": "coordinator",
+      "createdAt": "2026-05-13T02:53:42+08:00",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    }
+  ],
+  "messages": [],
+  "timeline": [
+    {
+      "id": "E001",
+      "kind": "feature",
+      "title": "初始化功能骨架",
+      "summary": "已创建 feature 目录、状态真源与镜像文件。",
+      "actor": "coordinator",
+      "taskId": "T001",
+      "phase": "P0 Intake",
+      "severity": "info",
+      "status": "done",
+      "createdAt": "2026-05-13T01:23:54+08:00",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "E002",
+      "kind": "decision",
+      "title": "切换为开放式猎物生态",
+      "summary": "TokenFlow 从固定五项升级为可持续吸收的新猎物生态。",
+      "actor": "coordinator",
+      "taskId": "T001",
+      "phase": "P1 Proposal Sprint",
+      "severity": "info",
+      "status": "done",
+      "createdAt": "2026-05-13T01:36:00+08:00",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "E003",
+      "kind": "dispatch",
+      "title": "派发 4 个并行 worker",
+      "summary": "按独立写入域派发 core/manifests/prey、mcp、renderers、bridges 四条并行子任务。",
+      "actor": "coordinator",
+      "taskId": "T002",
+      "phase": "P1 Proposal Sprint",
+      "severity": "info",
+      "status": "done",
+      "createdAt": "2026-05-13T01:40:00+08:00",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "E004",
+      "kind": "integration",
+      "title": "集成 4 条 worker 产物",
+      "summary": "已合并 core/manifests/prey、mcp、renderer、bridge 骨架，并补齐 shared rendering conventions。",
+      "actor": "coordinator",
+      "taskId": "T006",
+      "phase": "P2 Design/Dispatch",
+      "severity": "info",
+      "status": "done",
+      "createdAt": "2026-05-13T02:21:01+08:00",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "E005",
+      "kind": "verification",
+      "title": "完成 JSON 与对齐校验",
+      "summary": "已通过 JSON 解析、candidate family ID 对齐、template/bridge conventions 对齐与 TS scaffold 非空检查。",
+      "actor": "coordinator",
+      "taskId": "T006",
+      "phase": "P2 Design/Dispatch",
+      "severity": "info",
+      "status": "done",
+      "createdAt": "2026-05-13T02:21:01+08:00",
+      "updatedAt": "2026-05-13T02:21:01+08:00"
+    },
+    {
+      "id": "E006",
+      "kind": "implementation",
+      "title": "落地 generation 与 validation 脚本",
+      "summary": "新增 scripts 入口，并生成 examples/generated 下的最小样例产物。",
+      "actor": "coordinator",
+      "taskId": "T006",
+      "phase": "P2 Design/Dispatch",
+      "severity": "info",
+      "status": "done",
+      "createdAt": "2026-05-13T02:53:42+08:00",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "id": "E007",
+      "kind": "verification",
+      "title": "完成 generation / validation 闭环验证",
+      "summary": "已顺序通过 generation 与 validation，并修正单元素数组被压扁的问题。",
+      "actor": "coordinator",
+      "taskId": "T006",
+      "phase": "P2 Design/Dispatch",
+      "severity": "info",
+      "status": "done",
+      "createdAt": "2026-05-13T02:53:42+08:00",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "id": "E008",
+      "kind": "dispatch",
+      "title": "派发 5 个并行 runtime worker",
+      "summary": "按独立写入域派发 MCP runtime、renderer runtime、bridge runtime、smoke test、docs 五条并行子任务。",
+      "actor": "coordinator",
+      "taskId": "T007",
+      "phase": "P3 Runtime Implementation",
+      "severity": "info",
+      "status": "in_progress",
+      "createdAt": "2026-05-13T04:06:55.1680928+08:00",
+      "updatedAt": "2026-05-13T04:06:55.1680928+08:00"
+    },
+    {
+      "id": "E009",
+      "kind": "integration",
+      "title": "集成 5 条 runtime worker 产物",
+      "summary": "已合并 MCP runtime、renderer runtime、bridge runtime、smoke test、docs 五条并行子任务产物。",
+      "actor": "coordinator",
+      "taskId": "T011",
+      "phase": "P3 Runtime Implementation",
+      "severity": "info",
+      "status": "done",
+      "createdAt": "2026-05-13T04:15:36.0337096+08:00",
+      "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+    },
+    {
+      "id": "E010",
+      "kind": "verification",
+      "title": "完成 smoke test 端到端验证",
+      "summary": "已通过 32 个测试，覆盖 generation、validation、runtime load、artifact integrity。",
+      "actor": "coordinator",
+      "taskId": "T010",
+      "phase": "P3 Runtime Implementation",
+      "severity": "info",
+      "status": "done",
+      "createdAt": "2026-05-13T04:15:36.0337096+08:00",
+      "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+    }
+  ],
+  "dispatchPackets": [],
+  "alerts": [],
+  "phaseSummaries": [
+    {
+      "id": "PS001",
+      "phase": "P2",
+      "summary": "5 步骨架与最小 generation / validation 闭环已全部落地，真源、候选家族、adapter、bridge 与共享渲染约定已收口。",
+      "currentTaskId": "",
+      "blockers": [],
+      "latestDecision": "新增 generation / validation scripts，形成最小可执行闭环。",
+      "latestVerification": "generation / validation scripts 与 examples/generated 样例产物通过。",
+      "nextAction": "继续实装 adapters/mcp 的 runtime 入口，再补正式 renderer 与 bridge runtime。",
+      "doNotDoNext": "不要直接绑定单一宿主，也不要把 candidate 家族提前标成 absorbed。",
+      "memoryRefs": [
+        "planning/brief.md",
+        "handoff.md",
+        "report.md"
+      ],
+      "tokenCostNote": "先冻结共享 truth 与渲染约定，再扩运行时，能减少后续重复 schema/token 开销。",
+      "actor": "phase-summarizer",
+      "createdAt": "2026-05-13T02:21:01+08:00",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "id": "PS002",
+      "phase": "P3",
+      "summary": "Runtime 实装与文档补全已全部完成，smoke test 全部通过，TokenFlow 已达到满血成品状态。",
+      "currentTaskId": "",
+      "blockers": [],
+      "latestDecision": "并行派发 5 个 runtime worker，按独立写入域推进。",
+      "latestVerification": "Smoke test 全部通过（32/32）。",
+      "nextAction": "可选：补充更多 candidate family 吸收实验、补充生产部署脚本、补充 CI/CD 流水线。",
+      "doNotDoNext": "不要破坏现有的 generation / validation / smoke test 链路。",
+      "memoryRefs": [
+        "planning/runtime-implementation-plan.md",
+        "handoff.md",
+        "report.md"
+      ],
+      "tokenCostNote": "并行 worker 策略显著加速了 runtime 实装，避免了串行等待。",
+      "actor": "phase-summarizer",
+      "createdAt": "2026-05-13T04:15:36.0337096+08:00",
+      "updatedAt": "2026-05-13T04:15:36.0337096+08:00"
+    }
+  ],
+  "bugCases": [],
+  "failurePatterns": [],
+  "highValueBehaviors": [],
+  "rolePlaybooks": [],
+  "promptPackets": [],
+  "externalTooling": {
+    "selectedHost": "",
+    "lastResolvedAt": "",
+    "recommendations": [],
+    "manifests": []
+  },
+  "promotedLearnings": [],
+  "memory": {
+    "summary": "TokenFlow 已完成从骨架到满血成品的全流程推进，当前状态：generation / validation / runtime / smoke test / docs 全部就绪。",
+    "durableDecisions": [
+      "TokenFlow 对外统一使用 TokenFlow，仓库保留 token-workflow-tools。",
+      "猎物层按能力家族组织，不设硬上限。",
+      "首批五个工具只是样本，不是上限。",
+      "PowerShell 先承接 generation / validation 闭环，等 runtime 深化后再决定是否补 TS 构建链。",
+      "并行 worker 策略：MCP runtime、renderer runtime、bridge runtime、smoke test、docs 五条独立写入域并行推进。"
+    ],
+    "openQuestions": [],
+    "importantPaths": [
+      ".codex-teams/features",
+      "state.json",
+      "handoff.md",
+      "report.md",
+      "scripts/Invoke-TokenFlowGeneration.ps1",
+      "scripts/Invoke-TokenFlowValidation.ps1",
+      "examples/generated/",
+      "manifests/rendering-conventions.json",
+      "adapters/"
+    ],
+    "lastUpdatedBy": "coordinator",
+    "lastUpdatedAt": "2026-05-13T04:15:36.0337096+08:00"
+  },
+  "memoryLayers": {
+    "globalRefs": [
+      "AGENTS.md",
+      "PROJECT_CONSTRAINTS.md"
+    ],
+    "rolePlaybookRefs": [
+      "config/logical-roles.json",
+      "config/token-tooling.json",
+      "skills/codex-teams/references"
+    ],
+    "featureRefs": [
+      "state.json",
+      "handoff.md",
+      "memory.md",
+      "retrieval-index.json"
+    ],
+    "scratchRoots": [
+      "scratch"
+    ],
+    "resumePacket": {
+      "objective": "TokenFlow 终极形态落地",
+      "currentPhase": "P2",
+      "currentTask": "",
+      "blockers": [],
+      "latestDecision": "并行派发 5 个 runtime worker，按独立写入域推进。",
+      "latestVerification": "Smoke test 全部通过（32/32）。",
+      "nextAction": "可选：补充更多 candidate family 吸收实验、补充生产部署脚本、补充 CI/CD 流水线。",
+      "doNotDoNext": "不要破坏现有的 generation / validation / smoke test 链路。",
+      "memoryRefs": [
+        "state.json",
+        "handoff.md",
+        "memory.md",
+        "retrieval-index.json",
+        "state.json#rolePlaybooks",
+        "state.json#promptPackets",
+        "state.json#externalTooling"
+      ]
+    }
+  },
+  "handoff": {
+    "lastCompletedTaskId": "T011",
+    "currentTaskId": "",
+    "blockers": [],
+    "nextAction": "可选：补充更多 candidate family 吸收实验、补充生产部署脚本、补充 CI/CD 流水线。",
+    "doNotDoNext": "不要破坏现有的 generation / validation / smoke test 链路。",
+    "latestVerification": "Smoke test 全部通过（32/32）。"
+  }
+}

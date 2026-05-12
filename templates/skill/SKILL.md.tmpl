@@ -1,0 +1,31 @@
+---
+name: {{skill_name}}
+description: "{{skill_description_zh}}"
+---
+
+# {{skill_title_zh}}
+
+## 用途
+
+{{purpose_zh}}
+
+## 触发关键词
+
+{{trigger_keywords_zh}}
+
+## 边界
+
+{{boundaries_zh}}
+
+## 输入映射
+
+- capability ids: {{capability_ids_csv}}
+- tools: {{tool_ids_csv}}
+- source manifest: `manifests/tooling-manifest.json`
+- conventions manifest: `manifests/rendering-conventions.json`
+
+## 执行步骤（骨架）
+
+1. 读取 manifest 并构建能力上下文。
+2. 按触发策略选择能力组合。
+3. 调用对应 `MCP` / `Command` / `Hook` 引用。

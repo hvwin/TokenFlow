@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "bridgeId": "generic-ide",
+  "displayName": "Generic IDE Bridge",
+  "scope": "host-agnostic",
+  "consumesTruth": [
+    "core/capability-graph.json",
+    "manifests/tooling-manifest.json",
+    "manifests/adapter-matrix.json",
+    "manifests/rendering-conventions.json"
+  ],
+  "exports": [
+    "resolveGenericIdeBridge",
+    "renderGenericIdePayloads",
+    "verifyGenericIdeTruth"
+  ],
+  "relations": {
+    "skill": "semantic-trigger-surface",
+    "mcp": "preferred-execution-surface",
+    "hook": "optional-prepost-enhancement",
+    "command": "explicit-fallback-surface"
+  },
+  "notes": [
+    "render bridge payloads from shared truth only",
+    "do not redefine core capabilities inside bridge",
+    "host runtime state is out of scope"
+  ]
+}

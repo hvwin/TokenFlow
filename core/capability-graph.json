@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "product": "TokenFlow",
+  "modules": [
+    {
+      "id": "router",
+      "inputs": ["task", "hostCapabilities", "availableAdapters"],
+      "outputs": ["routePlan", "selectedRole", "selectedModel", "selectedAdapter"]
+    },
+    {
+      "id": "tokeneff",
+      "inputs": ["prompt", "contextWindow", "toolSurface", "history"],
+      "outputs": ["budgetPlan", "compressionPlan", "cacheHint", "rerouteHint"]
+    },
+    {
+      "id": "toolkit",
+      "inputs": ["task", "routePlan", "budgetPlan", "hostCapabilities"],
+      "outputs": ["toolBundle", "renderBundle", "executionMode"]
+    },
+    {
+      "id": "openwolf",
+      "inputs": ["task", "repoShape", "externalSources"],
+      "outputs": ["scoutPlan", "intakePlan", "evidencePriority"]
+    },
+    {
+      "id": "caveman",
+      "inputs": ["boundedTask", "toolBundle", "verificationMode"],
+      "outputs": ["executionPlan", "verificationPlan", "repairPlan"]
+    }
+  ],
+  "flows": [
+    {
+      "from": "openwolf",
+      "to": "router",
+      "reason": "scouting informs route quality"
+    },
+    {
+      "from": "router",
+      "to": "tokeneff",
+      "reason": "route choice affects token budget"
+    },
+    {
+      "from": "tokeneff",
+      "to": "toolkit",
+      "reason": "budget plan constrains tool surface"
+    },
+    {
+      "from": "toolkit",
+      "to": "caveman",
+      "reason": "bounded execution consumes the selected bundle"
+    }
+  ],
+  "absorptionPolicy": {
+    "mode": "capability-first",
+    "statusModel": ["candidate", "planned", "absorbing", "absorbed", "retired"],
+    "criteria": [
+      "stable capability",
+      "host-agnostic core mapping",
+      "token or workflow value",
+      "adapter renderability"
+    ],
+    "promotionGates": {
+      "candidateToPlanned": [
+        "family classified in manifests/candidate-families.json",
+        "candidate indexed in prey/prey-sources.json"
+      ],
+      "plannedToAbsorbing": [
+        "target module resolved in candidateRouting",
+        "adapter compatibility checked in manifests/adapter-matrix.json"
+      ],
+      "absorbingToAbsorbed": [
+        "core and manifests truth merged",
+        "json validation passed and status synced in prey/absorption-status.md"
+      ]
+    },
+    "candidateRouting": [
+      {
+        "family": "prompt-compression",
+        "target": "tokeneff"
+      },
+      {
+        "family": "mcp-optimization",
+        "target": "toolkit"
+      },
+      {
+        "family": "skills-caching",
+        "target": "tokeneff"
+      },
+      {
+        "family": "rtk",
+        "target": "tokeneff"
+      }
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "adapterId": "mcp",
+  "product": "TokenFlow",
+  "executionSurface": "primary",
+  "entryShapes": [
+    {
+      "id": "server",
+      "status": "scaffold",
+      "purpose": "Expose TokenFlow capability-derived tools as MCP server surface",
+      "hostBinding": "agnostic"
+    },
+    {
+      "id": "gateway",
+      "status": "scaffold",
+      "purpose": "Bridge host calls into TokenFlow tool surface without redefining truth",
+      "hostBinding": "agnostic"
+    }
+  ],
+  "toolSurfaceSource": {
+    "core": "core/capability-graph.json",
+    "manifests": [
+      "manifests/tooling-manifest.json",
+      "manifests/adapter-matrix.json",
+      "manifests/candidate-families.json",
+      "manifests/rendering-conventions.json"
+    ],
+    "policy": [
+      "render, do not re-define, core truth",
+      "never duplicate capability truth across adapters",
+      "prefer the strongest adapter surface available in the host"
+    ]
+  },
+  "renderBoundary": {
+    "inScope": [
+      "tool schema projection",
+      "runtime entry planning",
+      "host capability hinting"
+    ],
+    "outOfScope": [
+      "full MCP runtime implementation",
+      "single IDE lock-in",
+      "writing back capability truth into manifests/core"
+    ]
+  },
+  "nextArtifacts": [
+    "tool-schema-projection.json",
+    "server-entry.ts",
+    "gateway-entry.ts"
+  ]
+}

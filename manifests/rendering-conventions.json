@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "placeholderSyntax": {
+    "templateVariable": "{{variable_name}}",
+    "pathVariable": "{featureSlug}"
+  },
+  "mcp": {
+    "entryShapes": ["server", "gateway"]
+  },
+  "bridge": {
+    "phases": ["trigger", "execute", "enhance", "fallback"]
+  },
+  "hook": {
+    "stages": ["before", "after", "around"],
+    "actionTypes": ["mcp_ref", "skill_ref", "command_ref"]
+  },
+  "command": {
+    "entryKinds": ["mcp_tool", "command_ref", "script_ref", "prompt_ref"]
+  },
+  "codexTeams": {
+    "featureStatePathTemplate": ".codex-teams/features/{featureSlug}/state.json"
+  },
+  "notes": [
+    "freeze shared enum-like values before runtime implementation",
+    "render adapters from manifests and core truth only",
+    "feature context is orchestration state, not capability truth"
+  ]
+}

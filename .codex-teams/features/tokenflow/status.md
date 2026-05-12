@@ -1,0 +1,40 @@
+# 状态
+
+- 功能: TokenFlow 终极形态落地
+- 目标: TokenFlow 终极形态落地
+- 当前状态: 已完成
+- 当前阶段: P2 Design/Dispatch
+- 规划模式: direct
+- 已选方案: direct-open-ecosystem
+- 并发上限: 1
+- 队列摘要: proposal=0; ready=0; review=0; verify=0; rework=0; patrol=0; blocked=0
+- 当前任务总数: 6
+- 代理总数: 4
+- 验证记录数: 3
+- 决策记录数: 2
+- 协作消息数: 0
+- 未读消息数: 0
+- 已读消息数: 0
+- 已归档消息数: 0
+- 活动时间线条数: 5
+- Dispatch Packet 数: 0
+- 活跃 Lease 数: 0
+- 活跃告警数: 0
+- Phase Summary 数: 1
+- Bug Case 数: 0
+- Durable Decisions 数: 2
+- Failure Patterns 数: 0
+- High Value Behaviors 数: 0
+- Role Playbooks 数: 0
+- Prompt Packets 数: 0
+- Promoted Learnings 数: 0
+- Open Questions 数: 3
+- 关键路径数: 9
+- 当前任务: -
+- 上一个完成任务: T006
+- 阻塞项: -
+- 下一步: 如继续推进，先补 scripts 校验器和 MCP projection/runtime 入口。
+- 当前不要做: 不要直接绑定单一宿主或提前宣布 candidate 家族已吸收。
+- 最新验证: JSON 解析、family ID 与 template/bridge conventions 对齐通过。
+- 最近活动: [验证] 完成 JSON 与对齐校验 - 已通过 JSON 解析、candidate family ID 对齐、template/bridge conventions 对齐与 TS scaffold 非空检查。
+- 最近阶段总结: 5 步骨架已全部落地，真源、候选家族、adapter、bridge 与共享渲染约定已收口。

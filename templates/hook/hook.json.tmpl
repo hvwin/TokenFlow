@@ -1,0 +1,17 @@
+{
+  "hook_id": "{{hook_id}}",
+  "title_zh": "{{title_zh}}",
+  "host": "{{host_id}}",
+  "stage": "{{stage}}",
+  "enabled": {{enabled_json}},
+  "when": {
+    "event": "{{event_name}}",
+    "conditions": {{conditions_json}}
+  },
+  "actions": {{actions_json}},
+  "source": {
+    "tooling_manifest": "manifests/tooling-manifest.json",
+    "adapter_matrix": "manifests/adapter-matrix.json",
+    "rendering_conventions": "manifests/rendering-conventions.json"
+  }
+}

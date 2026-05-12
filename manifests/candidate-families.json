@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "statusModel": ["candidate", "planned", "absorbing", "absorbed", "retired"],
+  "families": [
+    {
+      "id": "prompt-compression",
+      "title": "Prompt Compression",
+      "members": [
+        "LLMLingua",
+        "prompt_compressor",
+        "TokenCrush",
+        "PCToolkit",
+        "PromptOptimizer"
+      ],
+      "goal": "direct prompt compression and token reduction",
+      "status": "candidate",
+      "preferredCore": "tokeneff",
+      "preferredAdapters": ["mcp", "hook", "skill"],
+      "candidateDoc": "prey/candidates/prompt-compression.md"
+    },
+    {
+      "id": "mcp-optimization",
+      "title": "MCP Optimization",
+      "members": [
+        "Dynamic Toolsets",
+        "Unlock Pattern",
+        "Code Execution MCP",
+        "Claude Code Skills",
+        "Bifrost MCP Gateway"
+      ],
+      "goal": "reduce tool surface and schema overhead",
+      "status": "candidate",
+      "preferredCore": "toolkit",
+      "preferredAdapters": ["mcp", "skill", "command"],
+      "candidateDoc": "prey/candidates/mcp-optimization.md"
+    },
+    {
+      "id": "skills-caching",
+      "title": "Skills / Caching",
+      "members": [
+        "Claude Skills",
+        "Prompt Caching",
+        "Semantic Caching",
+        "GPTCache"
+      ],
+      "goal": "reuse SOP and cache repeated context",
+      "status": "candidate",
+      "preferredCore": "tokeneff",
+      "preferredAdapters": ["skill", "hook", "mcp"],
+      "candidateDoc": "prey/candidates/skills-caching.md"
+    },
+    {
+      "id": "rtk",
+      "title": "RTK",
+      "members": [
+        "rtk-ai/rtk"
+      ],
+      "goal": "command output filtering and context compression",
+      "status": "candidate",
+      "preferredCore": "tokeneff",
+      "preferredAdapters": ["hook", "command"],
+      "candidateDoc": "prey/candidates/RTK.md"
+    }
+  ]
+}

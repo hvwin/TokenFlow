@@ -1,0 +1,103 @@
+{
+  "version": 2,
+  "featureSlug": "tokenflow",
+  "updatedAt": "2026-05-13T02:53:42+08:00",
+  "entries": [
+    {
+      "kind": "state",
+      "path": "state.json",
+      "summary": "P2 状态真源，5 步骨架与最小 generation/validation 闭环已完成。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "tasks",
+      "path": "tasks.md",
+      "summary": "6 个任务已全部完成，覆盖 core、manifests、adapters、bridges。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "handoff",
+      "path": "handoff.md",
+      "summary": "续做入口已切到 runtime 实装阶段。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "status",
+      "path": "status.md",
+      "summary": "当前状态快照：骨架、生成、校验链已齐，深层运行时待补。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "report",
+      "path": "report.md",
+      "summary": "本轮收口摘要、验证结果与剩余风险。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "planning-brief",
+      "path": "planning/brief.md",
+      "summary": "TokenFlow 终极形态与 5 步推进 brief。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "planning-review",
+      "path": "planning/review.md",
+      "summary": "direct 路线评审，freezeStatus=frozen。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "memory",
+      "path": "memory.md",
+      "summary": "durable decisions、open questions 与 resume packet。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "decisions",
+      "path": "decision-log.md",
+      "summary": "已记录开放式猎物生态、渲染共享约定、最小 generation/validation 闭环三类核心决策。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "timeline",
+      "path": "timeline.md",
+      "summary": "已记录初始化、派发、集成、生成与验证时间线。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "agents",
+      "path": "agents/",
+      "summary": "4 个 worker 证据包已归档。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "manifests",
+      "path": "../../manifests/",
+      "summary": "包含 tooling-manifest、adapter-matrix、candidate-families、rendering-conventions。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "adapters",
+      "path": "../../adapters/",
+      "summary": "mcp、skill、hook、command、generic-ide、codex-teams 骨架与最小 runtime/projection 类型已落地。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "templates",
+      "path": "../../templates/",
+      "summary": "skill、mcp、hook、command 模板已对齐共享约定。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "scripts",
+      "path": "../../scripts/",
+      "summary": "generation 与 validation 脚本已落地。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    },
+    {
+      "kind": "generated-examples",
+      "path": "../../examples/generated/",
+      "summary": "已生成 MCP projection、entry plan 与 skill/hook/command 样例产物。",
+      "updatedAt": "2026-05-13T02:53:42+08:00"
+    }
+  ]
+}

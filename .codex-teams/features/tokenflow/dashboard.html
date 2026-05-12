@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex 团队看板</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f3f5f9;
+      --fg: #172033;
+      --muted: #667085;
+      --line: #d0d7e2;
+      --panel: #ffffff;
+      --accent: #2563eb;
+      --ok: #15803d;
+      --warn: #b45309;
+      --bad: #b91c1c;
+      --soft: #e8eefc;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f131b;
+        --fg: #eef2ff;
+        --muted: #aab2c0;
+        --line: #283243;
+        --panel: #161b24;
+        --soft: #1b2432;
+      }
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: flex-start;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+    h2 {
+      margin: 24px 0 12px;
+      font-size: 16px;
+    }
+    .meta, .empty {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .status {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 13px;
+      color: var(--accent);
+      background: var(--panel);
+      white-space: nowrap;
+    }
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    button {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--fg);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font: inherit;
+      cursor: pointer;
+    }
+    input[type="file"] {
+      display: none;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 14px;
+    }
+    .summary-label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .summary-value {
+      font-size: 15px;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+    .summary-sub {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .handoff-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+    }
+    th {
+      color: var(--muted);
+      font-weight: 600;
+      background: color-mix(in srgb, var(--panel), var(--line) 22%);
+    }
+    tr:last-child td {
+      border-bottom: 0;
+    }
+    .badge {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 12px;
+      white-space: nowrap;
+      background: var(--soft);
+    }
+    .done { color: var(--ok); }
+    .blocked, .rework { color: var(--bad); }
+    .running, .in_review { color: var(--warn); }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    li + li {
+      margin-top: 6px;
+    }
+    @media (max-width: 900px) {
+      .summary-grid,
+      .handoff-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 640px) {
+      main {
+        padding: 16px;
+      }
+      header,
+      .summary-grid,
+      .handoff-grid {
+        grid-template-columns: 1fr;
+      }
+      .toolbar {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1 id="title">Codex 团队看板</h1>
+        <div class="meta" id="meta">正在加载状态文件...</div>
+      </div>
+      <div class="toolbar">
+        <div class="status" id="feature-status">准备中</div>
+        <label>
+          <input id="state-file" type="file" accept=".json,application/json">
+          <button id="load-file" type="button">加载状态文件</button>
+        </label>
+        <button id="refresh" type="button">刷新</button>
+      </div>
+    </header>
+
+    <section class="summary-grid">
+      <div class="panel">
+        <div class="summary-label">当前任务</div>
+        <div class="summary-value" id="current-task">-</div>
+        <div class="summary-sub" id="current-task-meta">当前没有活动任务。</div>
+      </div>
+      <div class="panel">
+        <div class="summary-label">最近完成</div>
+        <div class="summary-value" id="last-completed">-</div>
+        <div class="summary-sub" id="last-completed-meta">还没有完成任务。</div>
+      </div>
+      <div class="panel">
+        <div class="summary-label">阻塞项</div>
+        <div class="summary-value" id="blockers-count">0</div>
+        <div class="summary-sub" id="blockers-text">当前没有阻塞项。</div>
+      </div>
+      <div class="panel">
+        <div class="summary-label">验证</div>
+        <div class="summary-value" id="verification-summary">-</div>
+        <div class="summary-sub" id="verification-meta">还没有记录验证。</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>交接</h2>
+      <div class="handoff-grid">
+        <div class="panel">
+          <div class="summary-label">下一步</div>
+          <div class="summary-value" id="next-action">-</div>
+        </div>
+        <div class="panel">
+          <div class="summary-label">当前不要做</div>
+          <div class="summary-value" id="do-not-do-next">-</div>
+        </div>
+        <div class="panel">
+          <div class="summary-label">任务状态分布</div>
+          <div class="stack" id="status-counts"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>任务</h2>
+      <div id="tasks"></div>
+    </section>
+
+    <section>
+      <h2>代理</h2>
+      <div id="agents"></div>
+    </section>
+
+    <section>
+      <h2>验证</h2>
+      <div id="verification"></div>
+    </section>
+
+    <section>
+      <h2>决策</h2>
+      <div id="decisions"></div>
+    </section>
+
+    <section>
+      <h2>协作消息</h2>
+      <div id="mailbox"></div>
+    </section>
+
+    <section>
+      <h2>活动时间线</h2>
+      <div id="timeline"></div>
+    </section>
+  </main>
+
+  <script>
+    const safe = value => value == null || value === '' ? '-' : String(value);
+    const statusLabels = {
+      prepare: '准备中',
+      approved: '已批准',
+      running: '进行中',
+      blocked: '已阻塞',
+      in_review: '评审中',
+      rework: '返工中',
+      done: '已完成',
+      archived: '已归档'
+    };
+    const roleLabels = {
+      coordinator: '协调者',
+      architect: '架构师',
+      explorer: '探索者',
+      researcher: '研究员',
+      tester: '测试者',
+      reviewer: '审查者',
+      implementer: '实现者',
+      debugger: '调试者',
+      negotiator: '仲裁者',
+      'context-operator': '上下文操作员',
+      documenter: '文档整理者'
+    };
+    const messageStatusLabels = {
+      unread: '未读',
+      read: '已读',
+      archived: '已归档'
+    };
+    const displayStatus = value => statusLabels[value] || safe(value);
+    const displayRole = value => roleLabels[value] || safe(value);
+    const displayMessageStatus = value => messageStatusLabels[value] || safe(value);
+    const badge = status => `<span class="badge ${safe(status)}">${displayStatus(status)}</span>`;
+    const listText = value => Array.isArray(value) && value.length ? value.join(', ') : safe(value);
+    const taskRef = task => task ? `${safe(task.id)} - ${safe(task.title)}` : '-';
+    const table = (rows, columns) => {
+      if (!rows || rows.length === 0) return '<p class="empty">暂无记录。</p>';
+      return `<table><thead><tr>${columns.map(c => `<th>${c.label}</th>`).join('')}</tr></thead><tbody>${
+        rows.map(row => `<tr>${columns.map(c => `<td>${c.render ? c.render(row) : safe(row[c.key])}</td>`).join('')}</tr>`).join('')
+      }</tbody></table>`;
+    };
+    const decisionList = rows => {
+      if (!rows || rows.length === 0) return '<p class="empty">暂无决策。</p>';
+      return `<div class="panel"><ul>${rows.map(row => `<li><strong>${safe(row.id)}</strong>: ${safe(row.summary)}${row.owner ? ` <span class="meta">(${displayRole(row.owner)})</span>` : ''}</li>`).join('')}</ul></div>`;
+    };
+    const findTask = (state, id) => (state.tasks || []).find(task => task.id === id);
+    const findCurrentTask = state => findTask(state, state.handoff?.currentTaskId) || (state.tasks || []).find(task => ['running', 'in_review', 'rework', 'approved', 'prepare', 'blocked'].includes(task.status));
+    const findLastCompletedTask = state => findTask(state, state.handoff?.lastCompletedTaskId) || [...(state.tasks || [])].filter(task => task.status === 'done').sort((a, b) => `${a.updatedAt || ''}${a.id}`.localeCompare(`${b.updatedAt || ''}${b.id}`)).pop();
+    const normalizeLatestVerification = text => String(text || '')
+      .replaceAll('[prepare]', '[准备中]')
+      .replaceAll('[approved]', '[已批准]')
+      .replaceAll('[running]', '[进行中]')
+      .replaceAll('[blocked]', '[已阻塞]')
+      .replaceAll('[in_review]', '[评审中]')
+      .replaceAll('[rework]', '[返工中]')
+      .replaceAll('[done]', '[已完成]')
+      .replaceAll('[archived]', '[已归档]');
+    const latestVerification = state => normalizeLatestVerification(state.handoff?.latestVerification) || (() => {
+      const items = [...(state.verification || [])].sort((a, b) => `${a.updatedAt || ''}${a.id}`.localeCompare(`${b.updatedAt || ''}${b.id}`));
+      if (!items.length) return '-';
+      const item = items[items.length - 1];
+      return `${safe(item.id)} [${displayStatus(item.status)}] ${safe(item.summary || item.command)}`;
+    })();
+    const blockerList = state => {
+      const explicit = state.handoff?.blockers || [];
+      if (explicit.length) return explicit;
+      return (state.tasks || []).filter(task => task.status === 'blocked').map(task => taskRef(task));
+    };
+    const messageLifecycle = (row, mode) => {
+      if (mode === 'consumed') {
+        const actor = row.consumedBy ? displayRole(row.consumedBy) : '';
+        const at = row.consumedAt || '';
+        if (!actor && !at) return '-';
+        if (actor && at) return `${actor} @ ${at}`;
+        return actor || at;
+      }
+      const parts = [];
+      if (row.archivedBy || row.archivedAt) {
+        const archivedActor = row.archivedBy ? displayRole(row.archivedBy) : '';
+        parts.push([archivedActor, row.archivedAt || ''].filter(Boolean).join(' @ '));
+      }
+      if (row.archiveReason) {
+        parts.push(`原因: ${row.archiveReason}`);
+      }
+      return parts.filter(Boolean).join(' | ') || '-';
+    };
+    const statusCounts = state => {
+      const counts = new Map();
+      (state.tasks || []).forEach(task => counts.set(task.status || 'unknown', (counts.get(task.status || 'unknown') || 0) + 1));
+      return Array.from(counts.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+    };
+    const renderState = state => {
+        const feature = state.feature || {};
+        const currentTask = findCurrentTask(state);
+        const lastCompleted = findLastCompletedTask(state);
+        const blockers = blockerList(state);
+        const verification = latestVerification(state);
+        document.getElementById('title').textContent = feature.title || feature.slug || 'Codex 团队功能';
+        document.getElementById('meta').textContent = `更新时间 ${safe(feature.updatedAt)}`;
+        document.getElementById('feature-status').textContent = displayStatus(feature.status);
+        document.getElementById('current-task').textContent = taskRef(currentTask);
+        document.getElementById('current-task-meta').textContent = currentTask ? `${displayRole(currentTask.owner)} · ${displayRole(currentTask.role)} · ${displayStatus(currentTask.status)}` : '当前没有活动任务。';
+        document.getElementById('last-completed').textContent = taskRef(lastCompleted);
+        document.getElementById('last-completed-meta').textContent = lastCompleted ? `${displayRole(lastCompleted.owner)} · ${safe(lastCompleted.updatedAt)}` : '还没有完成任务。';
+        document.getElementById('blockers-count').textContent = String(blockers.length);
+        document.getElementById('blockers-text').textContent = blockers.length ? blockers.join('; ') : '当前没有阻塞项。';
+        document.getElementById('verification-summary').textContent = verification;
+        document.getElementById('verification-meta').textContent = `已记录 ${(state.verification || []).length} 条验证；未读 ${(state.messages || []).filter(item => item.status === 'unread').length}，已归档 ${(state.messages || []).filter(item => item.status === 'archived').length}`;
+        document.getElementById('next-action').textContent = safe(state.handoff?.nextAction);
+        document.getElementById('do-not-do-next').textContent = safe(state.handoff?.doNotDoNext);
+        document.getElementById('status-counts').innerHTML = statusCounts(state).length
+          ? statusCounts(state).map(([name, count]) => `<span class="badge ${safe(name)}">${displayStatus(name)}: ${count}</span>`).join('')
+          : '<span class="empty">暂无任务状态。</span>';
+        document.getElementById('tasks').innerHTML = table(state.tasks || [], [
+          { key: 'id', label: '编号' },
+          { key: 'title', label: '任务' },
+          { key: 'status', label: '状态', render: row => badge(row.status) },
+          { key: 'owner', label: '负责人', render: row => displayRole(row.owner) },
+          { key: 'role', label: '角色', render: row => displayRole(row.role) },
+          { key: 'dependencies', label: '依赖', render: row => listText(row.dependencies) },
+          { key: 'writeScope', label: '写入范围', render: row => listText(row.writeScope) },
+          { key: 'deliverable', label: '交付物' }
+        ]);
+        document.getElementById('agents').innerHTML = table(state.agents || [], [
+          { key: 'id', label: '编号', render: row => `<code>${safe(row.id)}</code>` },
+          { key: 'name', label: '名称' },
+          { key: 'role', label: '角色', render: row => displayRole(row.role) },
+          { key: 'model', label: '模型' },
+          { key: 'taskId', label: '任务' },
+          { key: 'status', label: '状态', render: row => badge(row.status) },
+          { key: 'outputFile', label: '输出文件' }
+        ]);
+        document.getElementById('verification').innerHTML = table(state.verification || [], [
+          { key: 'id', label: '编号' },
+          { key: 'command', label: '命令', render: row => `<code>${safe(row.command)}</code>` },
+          { key: 'status', label: '状态', render: row => badge(row.status) },
+          { key: 'summary', label: '摘要' }
+        ]);
+        document.getElementById('decisions').innerHTML = decisionList(state.decisions || []);
+        document.getElementById('mailbox').innerHTML = table(state.messages || [], [
+          { key: 'id', label: '编号' },
+          { key: 'status', label: '状态', render: row => `<span class="badge">${displayMessageStatus(row.status)}</span>` },
+          { key: 'from', label: '发件角色', render: row => displayRole(row.from) },
+          { key: 'to', label: '收件角色', render: row => displayRole(row.to) },
+          { key: 'taskId', label: '任务' },
+          { key: 'subject', label: '主题' },
+          { key: 'priority', label: '优先级' },
+          { key: 'consumedAt', label: '消费信息', render: row => messageLifecycle(row, 'consumed') },
+          { key: 'archivedAt', label: '归档信息', render: row => messageLifecycle(row, 'archived') }
+        ]);
+        document.getElementById('timeline').innerHTML = table(state.timeline || [], [
+          { key: 'id', label: '编号' },
+          { key: 'kind', label: '类型', render: row => safe({
+            feature: '功能',
+            task: '任务',
+            agent: '代理',
+            verification: '验证',
+            decision: '决策',
+            memory: '记忆',
+            mailbox: '消息',
+            system: '系统'
+          }[row.kind] || row.kind) },
+          { key: 'title', label: '标题' },
+          { key: 'summary', label: '摘要' },
+          { key: 'actor', label: '执行者', render: row => displayRole(row.actor) },
+          { key: 'taskId', label: '任务' },
+          { key: 'status', label: '状态', render: row => {
+            if (!row.status) return '-';
+            if (['unread', 'read', 'archived'].includes(row.status)) {
+              return `<span class="badge">${displayMessageStatus(row.status)}</span>`;
+            }
+            return badge(row.status);
+          } }
+        ]);
+    };
+    const loadState = () => fetch('state.json', { cache: 'no-store' })
+      .then(response => response.ok ? response.json() : Promise.reject(new Error(response.statusText)))
+      .then(renderState)
+      .catch(error => {
+        document.getElementById('meta').textContent = `无法自动加载状态文件（state.json）：${error.message}。如果是本地直接打开，请手动点击“加载状态文件”。`;
+      });
+    const stateFile = document.getElementById('state-file');
+    const loadFileButton = document.getElementById('load-file');
+    document.getElementById('refresh').addEventListener('click', loadState);
+    loadFileButton.addEventListener('click', () => stateFile.click());
+    stateFile.addEventListener('change', event => {
+      const [file] = event.target.files || [];
+      if (!file) return;
+      file.text()
+        .then(text => JSON.parse(text))
+        .then(renderState)
+        .catch(error => {
+          document.getElementById('meta').textContent = `无法解析所选状态文件（state.json）：${error.message}`;
+        });
+    });
+    loadState();
+    window.setInterval(loadState, 5000);
+  </script>
+</body>
+</html>

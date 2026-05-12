@@ -1,0 +1,32 @@
+{
+  "command_id": "tokenflow-rtk",
+  "title_zh": "TokenFlow RTK Command",
+  "host": "ide-agent",
+  "entry": {
+    "kind": "command_ref",
+    "ref": "rtk-ai/rtk"
+  },
+  "arguments": [
+    {
+      "name": "profile",
+      "type": "string",
+      "required": false,
+      "description_zh": "压缩策略或 profile 名称。"
+    },
+    {
+      "name": "passthrough",
+      "type": "boolean",
+      "required": false,
+      "description_zh": "是否保留原始输出透传。"
+    }
+  ],
+  "capabilities": [
+    "tokeneff"
+  ],
+  "source": {
+    "tooling_manifest": "manifests/tooling-manifest.json",
+    "adapter_matrix": "manifests/adapter-matrix.json",
+    "rendering_conventions": "manifests/rendering-conventions.json"
+  }
+}
+

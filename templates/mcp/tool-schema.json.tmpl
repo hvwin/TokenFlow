@@ -1,0 +1,17 @@
+{
+  "tool_id": "{{tool_id}}",
+  "title_zh": "{{title_zh}}",
+  "description_zh": "{{description_zh}}",
+  "entry_shape": "{{entry_shape}}",
+  "capabilities": {{capabilities_json}},
+  "input_schema": {
+    "type": "object",
+    "properties": {{input_properties_json}},
+    "required": {{required_args_json}}
+  },
+  "source": {
+    "tooling_manifest": "manifests/tooling-manifest.json",
+    "adapter_matrix": "manifests/adapter-matrix.json",
+    "rendering_conventions": "manifests/rendering-conventions.json"
+  }
+}

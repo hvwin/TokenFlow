@@ -1,0 +1,30 @@
+{
+  "hook_id": "tokenflow-prompt-compression-hook",
+  "title_zh": "TokenFlow Prompt Compression Hook",
+  "host": "ide-agent",
+  "stage": "before",
+  "enabled": true,
+  "when": {
+    "event": "before_prompt_send",
+    "conditions": [
+      "hostCapability == 'ide-agent'",
+      "familyStatus == 'candidate'"
+    ]
+  },
+  "actions": [
+    {
+      "type": "mcp_ref",
+      "ref": "tokenflow-tokeneff",
+      "input_map": {
+        "capability_id": "tokeneff",
+        "family_id": "prompt-compression"
+      }
+    }
+  ],
+  "source": {
+    "tooling_manifest": "manifests/tooling-manifest.json",
+    "adapter_matrix": "manifests/adapter-matrix.json",
+    "rendering_conventions": "manifests/rendering-conventions.json"
+  }
+}
+

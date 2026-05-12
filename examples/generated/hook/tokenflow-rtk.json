@@ -1,0 +1,30 @@
+{
+  "hook_id": "tokenflow-rtk-hook",
+  "title_zh": "TokenFlow RTK Hook",
+  "host": "ide-agent",
+  "stage": "after",
+  "enabled": true,
+  "when": {
+    "event": "after_command_exec",
+    "conditions": [
+      "hostCapability == 'ide-agent'",
+      "familyStatus == 'candidate'"
+    ]
+  },
+  "actions": [
+    {
+      "type": "command_ref",
+      "ref": "tokenflow-rtk",
+      "input_map": {
+        "capability_id": "tokeneff",
+        "family_id": "rtk"
+      }
+    }
+  ],
+  "source": {
+    "tooling_manifest": "manifests/tooling-manifest.json",
+    "adapter_matrix": "manifests/adapter-matrix.json",
+    "rendering_conventions": "manifests/rendering-conventions.json"
+  }
+}
+

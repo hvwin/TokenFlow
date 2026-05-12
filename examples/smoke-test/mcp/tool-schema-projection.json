@@ -1,0 +1,245 @@
+{
+  "version": 1,
+  "product": "TokenFlow",
+  "adapterId": "mcp",
+  "hostCapability": "ide-agent",
+  "preferredEntryShape": "gateway",
+  "availableEntryShapes": [
+    "server",
+    "gateway"
+  ],
+  "recommendedAdapters": [
+    "generic-ide",
+    "codex-teams",
+    "skill",
+    "mcp"
+  ],
+  "toolCount": 5,
+  "toolIds": [
+    "tokenflow-router",
+    "tokenflow-tokeneff",
+    "tokenflow-toolkit",
+    "tokenflow-openwolf",
+    "tokenflow-caveman"
+  ],
+  "moduleFamilyBindings": {
+    "toolkit": [
+      "mcp-optimization"
+    ],
+    "tokeneff": [
+      "prompt-compression",
+      "skills-caching",
+      "rtk"
+    ]
+  },
+  "tools": [
+    {
+      "tool_id": "tokenflow-router",
+      "title_zh": "路由中枢",
+      "description_zh": "路由中枢 能力入口。职责: routePlan, selectedRole, selectedModel, selectedAdapter。",
+      "entry_shape": "gateway",
+      "capabilities": [
+        "router"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "task": {
+            "type": "string",
+            "description": "Input field task."
+          },
+          "hostCapabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List input for hostCapabilities."
+          },
+          "availableAdapters": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List input for availableAdapters."
+          }
+        },
+        "required": [
+          "task",
+          "hostCapabilities",
+          "availableAdapters"
+        ]
+      },
+      "source": {
+        "tooling_manifest": "manifests/tooling-manifest.json",
+        "adapter_matrix": "manifests/adapter-matrix.json",
+        "rendering_conventions": "manifests/rendering-conventions.json"
+      }
+    },
+    {
+      "tool_id": "tokenflow-tokeneff",
+      "title_zh": "token 预算与压缩控制",
+      "description_zh": "token 预算与压缩控制 能力入口。职责: budgetPlan, compressionPlan, cacheHint, rerouteHint。",
+      "entry_shape": "gateway",
+      "capabilities": [
+        "tokeneff"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "Input field prompt."
+          },
+          "contextWindow": {
+            "type": "number",
+            "description": "Context window size or token budget ceiling."
+          },
+          "toolSurface": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List input for toolSurface."
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List input for history."
+          }
+        },
+        "required": [
+          "prompt",
+          "contextWindow",
+          "toolSurface",
+          "history"
+        ]
+      },
+      "source": {
+        "tooling_manifest": "manifests/tooling-manifest.json",
+        "adapter_matrix": "manifests/adapter-matrix.json",
+        "rendering_conventions": "manifests/rendering-conventions.json"
+      }
+    },
+    {
+      "tool_id": "tokenflow-toolkit",
+      "title_zh": "最小工具包编排",
+      "description_zh": "最小工具包编排 能力入口。职责: toolBundle, renderBundle, executionMode。",
+      "entry_shape": "gateway",
+      "capabilities": [
+        "toolkit"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "task": {
+            "type": "string",
+            "description": "Input field task."
+          },
+          "routePlan": {
+            "type": "string",
+            "description": "Input field routePlan."
+          },
+          "budgetPlan": {
+            "type": "string",
+            "description": "Input field budgetPlan."
+          },
+          "hostCapabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List input for hostCapabilities."
+          }
+        },
+        "required": [
+          "task",
+          "routePlan",
+          "budgetPlan",
+          "hostCapabilities"
+        ]
+      },
+      "source": {
+        "tooling_manifest": "manifests/tooling-manifest.json",
+        "adapter_matrix": "manifests/adapter-matrix.json",
+        "rendering_conventions": "manifests/rendering-conventions.json"
+      }
+    },
+    {
+      "tool_id": "tokenflow-openwolf",
+      "title_zh": "高信号侦察",
+      "description_zh": "高信号侦察 能力入口。职责: scoutPlan, intakePlan, evidencePriority。",
+      "entry_shape": "gateway",
+      "capabilities": [
+        "openwolf"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "task": {
+            "type": "string",
+            "description": "Input field task."
+          },
+          "repoShape": {
+            "type": "string",
+            "description": "Input field repoShape."
+          },
+          "externalSources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List input for externalSources."
+          }
+        },
+        "required": [
+          "task",
+          "repoShape",
+          "externalSources"
+        ]
+      },
+      "source": {
+        "tooling_manifest": "manifests/tooling-manifest.json",
+        "adapter_matrix": "manifests/adapter-matrix.json",
+        "rendering_conventions": "manifests/rendering-conventions.json"
+      }
+    },
+    {
+      "tool_id": "tokenflow-caveman",
+      "title_zh": "窄边界执行",
+      "description_zh": "窄边界执行 能力入口。职责: executionPlan, verificationPlan, repairPlan。",
+      "entry_shape": "gateway",
+      "capabilities": [
+        "caveman"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "boundedTask": {
+            "type": "string",
+            "description": "Input field boundedTask."
+          },
+          "toolBundle": {
+            "type": "string",
+            "description": "Input field toolBundle."
+          },
+          "verificationMode": {
+            "type": "string",
+            "description": "Input field verificationMode."
+          }
+        },
+        "required": [
+          "boundedTask",
+          "toolBundle",
+          "verificationMode"
+        ]
+      },
+      "source": {
+        "tooling_manifest": "manifests/tooling-manifest.json",
+        "adapter_matrix": "manifests/adapter-matrix.json",
+        "rendering_conventions": "manifests/rendering-conventions.json"
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "tool_id": "tokenflow-toolkit",
+  "title_zh": "最小工具包编排",
+  "description_zh": "最小工具包编排 能力入口。职责: toolBundle, renderBundle, executionMode。",
+  "entry_shape": "gateway",
+  "capabilities": [
+    "toolkit"
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "task": {
+        "type": "string",
+        "description": "Input field task."
+      },
+      "routePlan": {
+        "type": "string",
+        "description": "Input field routePlan."
+      },
+      "budgetPlan": {
+        "type": "string",
+        "description": "Input field budgetPlan."
+      },
+      "hostCapabilities": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List input for hostCapabilities."
+      }
+    },
+    "required": [
+      "task",
+      "routePlan",
+      "budgetPlan",
+      "hostCapabilities"
+    ]
+  },
+  "source": {
+    "tooling_manifest": "manifests/tooling-manifest.json",
+    "adapter_matrix": "manifests/adapter-matrix.json",
+    "rendering_conventions": "manifests/rendering-conventions.json"
+  }
+}
+

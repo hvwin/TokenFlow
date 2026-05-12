@@ -1,0 +1,43 @@
+{
+  "tool_id": "tokenflow-router",
+  "title_zh": "路由中枢",
+  "description_zh": "路由中枢 能力入口。职责: routePlan, selectedRole, selectedModel, selectedAdapter。",
+  "entry_shape": "gateway",
+  "capabilities": [
+    "router"
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "task": {
+        "type": "string",
+        "description": "Input field task."
+      },
+      "hostCapabilities": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List input for hostCapabilities."
+      },
+      "availableAdapters": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List input for availableAdapters."
+      }
+    },
+    "required": [
+      "task",
+      "hostCapabilities",
+      "availableAdapters"
+    ]
+  },
+  "source": {
+    "tooling_manifest": "manifests/tooling-manifest.json",
+    "adapter_matrix": "manifests/adapter-matrix.json",
+    "rendering_conventions": "manifests/rendering-conventions.json"
+  }
+}
+

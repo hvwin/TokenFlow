@@ -1,0 +1,51 @@
+{
+  "results": {
+    "passed": [
+      "Generation script executed successfully",
+      "Output root directory created",
+      "summary.json - valid JSON",
+      "MCP tools generated (5 tools)",
+      "Skills generated (3 skills)",
+      "Hooks generated (3 hooks)",
+      "Commands generated (2 commands)",
+      "MCP projection - valid JSON",
+      "MCP projection contains tools (5 tools)",
+      "MCP projection toolIds match tools count",
+      "MCP server entry - valid JSON",
+      "MCP gateway entry - valid JSON",
+      "JSON truth validation passed",
+      "Family alignment validation passed",
+      "Template alignment validation passed",
+      "Family rendering validation passed",
+      "Generated artifacts validation passed",
+      "npm run verify passed",
+      "Runtime bundle loaded successfully",
+      "Runtime tool count: 5",
+      "Runtime selected entry shape: server",
+      "Skill file exists: skill/prompt-compression/SKILL.md",
+      "Skill file exists: skill/mcp-optimization/SKILL.md",
+      "Skill file exists: skill/skills-caching/SKILL.md",
+      "Hook file exists: hook/tokenflow-prompt-compression.json",
+      "Hook file exists: hook/tokenflow-skills-caching.json",
+      "Hook file exists: hook/tokenflow-rtk.json",
+      "Command file exists: command/tokenflow-mcp-optimization.json",
+      "Command file exists: command/tokenflow-rtk.json",
+      "MCP tool file exists: tokenflow-router",
+      "MCP tool file exists: tokenflow-tokeneff",
+      "MCP tool file exists: tokenflow-toolkit",
+      "MCP tool file exists: tokenflow-openwolf",
+      "MCP tool file exists: tokenflow-caveman"
+    ],
+    "failed": [],
+    "skipped": []
+  },
+  "timestamp": "2026-05-13T05:38:25.1174949+08:00",
+  "hostCapability": "ide-agent",
+  "outputRoot": "examples/smoke-test",
+  "summary": {
+    "passed": 34,
+    "total": 34,
+    "failed": 0,
+    "skipped": 0
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "tool_id": "tokenflow-openwolf",
+  "title_zh": "高信号侦察",
+  "description_zh": "高信号侦察 能力入口。职责: scoutPlan, intakePlan, evidencePriority。",
+  "entry_shape": "gateway",
+  "capabilities": [
+    "openwolf"
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "task": {
+        "type": "string",
+        "description": "Input field task."
+      },
+      "repoShape": {
+        "type": "string",
+        "description": "Input field repoShape."
+      },
+      "externalSources": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List input for externalSources."
+      }
+    },
+    "required": [
+      "task",
+      "repoShape",
+      "externalSources"
+    ]
+  },
+  "source": {
+    "tooling_manifest": "manifests/tooling-manifest.json",
+    "adapter_matrix": "manifests/adapter-matrix.json",
+    "rendering_conventions": "manifests/rendering-conventions.json"
+  }
+}
+

@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "families": [
+    {
+      "id": "prompt-compression",
+      "skill": {
+        "purposeZh": "直接压缩 Prompt，降低上下文 token 成本，并尽量保持语义稳定。",
+        "triggerKeywordsZh": "Prompt Compression、TokenFlow、LLMLingua、prompt_compressor",
+        "boundariesZh": "只渲染接入骨架，不直接执行压缩器，也不改写能力真源。"
+      },
+      "hook": {
+        "stage": "before",
+        "event": "before_prompt_send",
+        "actionType": "mcp_ref",
+        "actionRef": "tokenflow-tokeneff"
+      },
+      "command": {
+        "entryKind": "prompt_ref",
+        "entryRef": "tokenflow-prompt-compression",
+        "arguments": [
+          {
+            "name": "ratio",
+            "type": "number",
+            "required": false,
+            "description_zh": "目标压缩比。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mcp-optimization",
+      "skill": {
+        "purposeZh": "缩小工具暴露面、减少 schema 开销，并把重计算从上下文里移走。",
+        "triggerKeywordsZh": "MCP Optimization、TokenFlow、Dynamic Toolsets、Bifrost MCP Gateway",
+        "boundariesZh": "只渲染接入骨架，不直接启动真实 MCP server 或 gateway。"
+      },
+      "hook": {
+        "stage": "around",
+        "event": "before_tool_schema_load",
+        "actionType": "mcp_ref",
+        "actionRef": "tokenflow-toolkit"
+      },
+      "command": {
+        "entryKind": "mcp_tool",
+        "entryRef": "tokenflow-toolkit",
+        "arguments": [
+          {
+            "name": "surface",
+            "type": "string",
+            "required": true,
+            "description_zh": "目标工具表面名称。"
+          },
+          {
+            "name": "mode",
+            "type": "string",
+            "required": false,
+            "description_zh": "执行模式，例如 server 或 gateway。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "skills-caching",
+      "skill": {
+        "purposeZh": "复用 SOP 与缓存重复上下文，降低重复推理和前缀成本。",
+        "triggerKeywordsZh": "Skills Caching、TokenFlow、Claude Skills、Prompt Caching、GPTCache",
+        "boundariesZh": "只渲染接入骨架，不直接接入真实缓存服务。"
+      },
+      "hook": {
+        "stage": "around",
+        "event": "before_context_attach",
+        "actionType": "skill_ref",
+        "actionRef": "tokenflow-skills-caching"
+      },
+      "command": {
+        "entryKind": "command_ref",
+        "entryRef": "tokenflow-skills-caching",
+        "arguments": [
+          {
+            "name": "cache_key",
+            "type": "string",
+            "required": false,
+            "description_zh": "显式缓存键。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rtk",
+      "skill": {
+        "purposeZh": "压缩命令输出、裁剪上下文，并衔接 hook 与 command 入口。",
+        "triggerKeywordsZh": "RTK、TokenFlow、Rust Token Killer、command compression",
+        "boundariesZh": "只渲染接入骨架，不直接代理命令执行。"
+      },
+      "hook": {
+        "stage": "after",
+        "event": "after_command_exec",
+        "actionType": "command_ref",
+        "actionRef": "tokenflow-rtk"
+      },
+      "command": {
+        "entryKind": "command_ref",
+        "entryRef": "rtk-ai/rtk",
+        "arguments": [
+          {
+            "name": "profile",
+            "type": "string",
+            "required": false,
+            "description_zh": "压缩策略或 profile 名称。"
+          },
+          {
+            "name": "passthrough",
+            "type": "boolean",
+            "required": false,
+            "description_zh": "是否保留原始输出透传。"
+          }
+        ]
+      }
+    }
+  ]
+}

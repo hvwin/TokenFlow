@@ -1,0 +1,48 @@
+{
+  "tool_id": "tokenflow-tokeneff",
+  "title_zh": "token 预算与压缩控制",
+  "description_zh": "token 预算与压缩控制 能力入口。职责: budgetPlan, compressionPlan, cacheHint, rerouteHint。",
+  "entry_shape": "gateway",
+  "capabilities": [
+    "tokeneff"
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "prompt": {
+        "type": "string",
+        "description": "Input field prompt."
+      },
+      "contextWindow": {
+        "type": "number",
+        "description": "Context window size or token budget ceiling."
+      },
+      "toolSurface": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List input for toolSurface."
+      },
+      "history": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List input for history."
+      }
+    },
+    "required": [
+      "prompt",
+      "contextWindow",
+      "toolSurface",
+      "history"
+    ]
+  },
+  "source": {
+    "tooling_manifest": "manifests/tooling-manifest.json",
+    "adapter_matrix": "manifests/adapter-matrix.json",
+    "rendering_conventions": "manifests/rendering-conventions.json"
+  }
+}
+

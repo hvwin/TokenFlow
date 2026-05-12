@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "hostMatrix": [
+    {
+      "hostCapability": "mcp",
+      "recommendedAdapters": ["mcp"],
+      "notes": "primary execution surface"
+    },
+    {
+      "hostCapability": "skill",
+      "recommendedAdapters": ["skill", "mcp"],
+      "notes": "semantic trigger plus execution"
+    },
+    {
+      "hostCapability": "hook",
+      "recommendedAdapters": ["hook", "command"],
+      "notes": "pre/post enforcement and command fallback"
+    },
+    {
+      "hostCapability": "command",
+      "recommendedAdapters": ["command"],
+      "notes": "explicit audit-friendly fallback"
+    },
+    {
+      "hostCapability": "ide-agent",
+      "recommendedAdapters": ["generic-ide", "codex-teams", "skill", "mcp"],
+      "notes": "bridge the same capability core into IDE or agent hosts"
+    }
+  ],
+  "renderingRules": [
+    "prefer the strongest adapter surface available in the host",
+    "never duplicate capability truth across adapters",
+    "render, do not re-define, core truth"
+  ],
+  "familyDefaults": [
+    {
+      "family": "prompt-compression",
+      "preferredAdapters": ["mcp", "hook", "skill"]
+    },
+    {
+      "family": "mcp-optimization",
+      "preferredAdapters": ["mcp", "skill", "command"]
+    },
+    {
+      "family": "skills-caching",
+      "preferredAdapters": ["skill", "hook", "mcp"]
+    },
+    {
+      "family": "rtk",
+      "preferredAdapters": ["hook", "command"]
+    }
+  ]
+}
